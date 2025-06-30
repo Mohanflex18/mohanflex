@@ -5,13 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MohanFlex</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .typing {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #00bcd4;
+      margin-top: 20px;
+      height: 30px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>MohanFlex</h1>
     <p>💪 Built to lift. Born to lead.</p>
-    <p>Welcome to the grind — MohanFlex HQ.</p>
+    <div class="typing" id="typing-text"></div>
     <a href="https://www.instagram.com/mohanflex_18" target="_blank">📸 Follow me on Instagram</a>
   </div>
+
+  <script>
+    const words = ["Fitness 🏋️", "Mindset 🧠", "Progress 📈"];
+    let i = 0;
+    let j = 0;
+    let currentWord = "";
+    let isDeleting = false;
+
+    function type() {
+      currentWord = words[i];
+      const element = document.getElementById("typing-text");
+
+      if (!isDeleting) {
+        element.textContent = currentWord.substring(0, j + 1);
+        j++;
+        if (j === currentWord.length) {
+          isDeleting = true;
+          setTimeout(type, 1200);
+          return;
+        }
+      } else {
+        element.textContent = currentWord.substring(0, j - 1);
+        j--;
+        if (j === 0) {
+          isDeleting = false;
+          i = (i + 1) % words.length;
+        }
+      }
+      setTimeout(type, 120);
+    }
+
+    type();
+  </script>
 </body>
 </html>
